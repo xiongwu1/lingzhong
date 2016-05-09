@@ -350,9 +350,10 @@ body{
 }
 
 .blog_operate {
-	width: 100%;
+	width: 99.5%;
 	height: 35px;
 	overflow: hidden;
+	border:1px solid #ccc;
 }
 
 #page {
@@ -570,6 +571,21 @@ div.user_atten ul li a:active {
 }
 
 /* ------微博关注CSS结束----------*/
+
+/* -------评论列表加载---------- */
+.commentsContent {
+	width:99.5%;
+	height:100px;
+	border:1px solid #ccc;
+}
+.sendCommentHead figure div {
+	width: 60px;
+	height: 60px;
+	border-radius: 100px;
+	overflow: hidden;
+}
+/* -------评论列表加载---------- */
+
 
 /*--copyrights--*/
 .copy-rights {

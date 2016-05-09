@@ -562,7 +562,17 @@
 					$($that).click(function() {
 						//邻文ID
 						var lwBlogId = $($that).attr('lwBlog-id');
-						alert(lwBlogId);
+						//alert(lwBlogId);
+						var html = "<div class='panel' style='width:99.5%;height:100px;border:1px solid #ccc;'></div>"
+						if($(".panel").length>0) {
+							$(".panel").remove();
+							//$(".panel").slideUp("slow");
+						}else {
+							$($that).parent().parent().parent().parent().append(html);
+							//$(".panel").slideDown("slow");
+						}
+						
+						
 						
 						/*if($($that).find("em").html() == "赞") {
 							$.ajax({

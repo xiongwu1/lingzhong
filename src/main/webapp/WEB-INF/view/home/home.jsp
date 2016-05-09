@@ -39,8 +39,8 @@
 		</form>
 		<input id="currentUserId" type="hidden" value="${CURRENT_USER.objectid }">
 		<div class="left_blog_list">
-		<%-- <div class="blog_list">
-			<div class="blog_content">
+		<div class="blog_list">
+			<%-- <div class="blog_content">
 				<div class="head_info">
 					<div class="head_left">
 						<figure>
@@ -70,7 +70,7 @@
 					<img alt="微博" src="${ctx}/resources/images/index/weibo_img3.jpg">
 					<img alt="微博" src="${ctx}/resources/images/index/weibo_img4.jpg">
 				</div>
-			</div>
+			</div> 
 			<div class='blog_operate'>
 				<ul>
 					<li><a href="javascript:void(0);">转发</a></li>
@@ -79,7 +79,15 @@
 					<li><a href="javascript:void(0);">收藏</a></li>
 				</ul>
 			</div>
-		</div> --%>
+			<div class='commentsContent'>
+				<div class="sendComment">
+					<div class="sendCommentHead">
+						<figure><div><img src="${ctx}/resources/images/default_icon.png" /></div></figure>
+					</div>
+					<div class="sendCommentInput"><textarea rows="5" cols="30"></textarea></div>
+				</div>
+			</div>--%>
+		</div>
 		</div>
 		<div id="page" style="width:610px;margin:0 auto;"><div id="kkpager"></div></div>
 	</div>
