@@ -603,8 +603,56 @@
 						}*/
 					});
 				});
-				
 			}
+			
+			//意见反馈
+			$(".feedBack").click(function() {
+				 layer.open({
+				 		title:['意见反馈','text-align:center;'],
+                        type: 1,
+                        area: ['500px', '360px'],
+                        shadeClose: true, //点击遮罩关闭
+                        content: '\<\div id="feedBackDiv" >'+
+                        '<p>反馈内容：</p><textarea rows="5" cols="36" maxlength="100"></textarea><br />'+
+                        '<p>联系方式：</p><input type="text" name="feedBackTel" id="feedBackTel" />'
+                        +'\<\/div>',
+
+                        shift: 1, //0-6的动画形式，-1不开启
+                        btn:['提交','取消'],
+                        yes: function(index, layero){
+
+                        	var feedBackContent = $("#feedBackDiv textarea").val();
+                        	var feedBackTel = $("input[name='feedBackTel']").val();
+                        	if(feedBackContent == "") {
+                        		Util.Tip.warning('反馈内容不能为空！');
+                        		return false;
+                        	}else if(feedBackTel =="") {
+                        		Util.Tip.warning('联系方式不能为空！');
+                        		return false;
+                        	}
+                        	$.ajax({
+								type : "POST",
+								dataType:"json",
+								url : CONTEXTPATH + "/FeedBack.do",
+								data : {feedBackContent:feedBackContent,feedBackTel:feedBackTel},
+								success : function(data) {
+									if(data.data == "SUCCESS") {
+										layer.msg('您好，感谢您的反馈与建议，我们会尽快改善！', {
+											  icon: 1,
+											  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+											}, function(){
+												window.open(CONTEXTPATH+"/home/home.do", "_self");
+											});   
+										
+									}
+								}
+							});
+                        },
+                        cancel: function(index){
+                        	layer.msg('您已取消反馈！');
+                        },
+                 });
+			});
 			
 		};
 		

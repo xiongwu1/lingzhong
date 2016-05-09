@@ -386,6 +386,13 @@
 
                         	var feedBackContent = $("#feedBackDiv textarea").val();
                         	var feedBackTel = $("input[name='feedBackTel']").val();
+                        	if(feedBackContent == "") {
+                        		Util.Tip.warning('反馈内容不能为空！');
+                        		return false;
+                        	}else if(feedBackTel =="") {
+                        		Util.Tip.warning('联系方式不能为空！');
+                        		return false;
+                        	}
                         	$.ajax({
 								type : "POST",
 								dataType:"json",
@@ -393,8 +400,13 @@
 								data : {feedBackContent:feedBackContent,feedBackTel:feedBackTel},
 								success : function(data) {
 									if(data.data == "SUCCESS") {
-										layer.msg("您好，感谢您的反馈与建议，我们会尽快改善！");
-										window.open(CONTEXTPATH+"/home/home.do", "_self");
+										layer.msg('您好，感谢您的反馈与建议，我们会尽快改善！', {
+											  icon: 1,
+											  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+											}, function(){
+												window.open(CONTEXTPATH+"/home/home.do", "_self");
+											});   
+										
 									}
 								}
 							});
