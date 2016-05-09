@@ -1,0 +1,39 @@
+﻿@charset "utf-8";
+/* --Elements Reset-- */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,label,textarea,p,blockquote,img,th,td{margin:0;padding:0;}
+img{border:none; float:none;}
+em,strong,th{font-style:normal;font-weight:normal;}
+ol,ul{list-style:none;}
+h1,h2,h3,h4,h5,h6{font-weight:normal;font-size:100%;}
+body{margin:0;font:16px "Microsoft YaHei", "微软雅黑", "Segoe UI", Arial,"宋体"; color:#42515A; background:#D3D5E1; word-break:break-all;}
+select,input, textarea{vertical-align:middle; padding:0;outline: none;font:16px "Microsoft YaHei", "微软雅黑", Arial,"宋体";/*background: url(../images/Blank.gif) center center repeat-x;*/}
+table{border-collapse:collapse;	border-spacing:0px;}
+q:before,q:after{ content:”; } 
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+}
+/* --Link Styles-- */
+a{color:#333;text-decoration: none;outline:none;blr:expression(this.onFocus=this.blur());}
+a:hover {color:#EB7350;}
+button{outline:0;_blr:expression(this.onFocus=this.blur());} /*去除边框虚线*/
+/*清除浮动*/
+.fix{*zoom:1;}.fix:after{display:block; content:"clear"; height:0; clear:both; overflow:hidden; visibility:hidden;}
+/*单行文字溢出虚点显示*/
+.ell{text-overflow:ellipsis; white-space:nowrap; overflow:hidden;}
+.no-bg{
+	background: none!important;
+	filter:none!important;
+}
+.not-empty{
+	color:red;
+	vertical-align: middle;
+	font-style: normal;
+	padding: 0 2px;
+}
+.mark{
+	color:red;
+}
+a.link{
+	color: #0d7ecd;
+	text-decoration: none;
+}

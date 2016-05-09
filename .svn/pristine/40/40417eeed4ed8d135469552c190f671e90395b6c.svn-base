@@ -1,0 +1,113 @@
+(function() {
+	
+	var Index = {
+		_init : function() {
+			window.Index= Index;
+		},
+		IndexData : {}
+	};
+	
+	//初始化
+	Index.Base = {
+	};
+	
+	Index.IndexData = (function() {
+		//页面加载
+		function IndexDataLoad() {
+			//渲染页面
+			$('body').mask().setMask();
+			$.when().done(function(){
+			}).then(function(){
+				IndexDataRender();
+				$('body').mask().clearMask();
+			}).fail(function(){
+				$('body').mask().clearMask();
+				window.parent.Util.warn('数据获取失败！');
+			});
+		};
+		
+		//渲染列表页面
+		function IndexDataRender(){
+			
+			var $loginName = $('input[name="loginName"]');
+			var $password = $('input[name="password"]');
+			
+			//表单是否填写验证
+			$loginName.blur(function() {
+				if($loginName.val() == "") {
+					Util.Tip.warning("账号不能为空！");
+					return false;
+				}
+			});
+			$password.blur(function() {
+				if($password.val() == "") {
+					Util.Tip.warning("密码不能为空！");
+					return false;
+				}
+			});
+			
+			$('.signin input').click(function() {
+				//表单是否填写验证
+				if($loginName.val() == "") {
+					Util.Tip.warning("账号不能为空！");
+					return false;
+				}
+				if($password.val() == "") {
+					Util.Tip.warning("密码不能为空！");
+					return false;
+				}
+				//验证密码规则
+				if($.trim($password.val()).length<6 || $.trim($password.val()).length > 20){
+					Util.Tip.warning("密码长度必须是6到20位 ！");
+				    $password.focus();
+					return false;
+				}
+				//验证登陆的是手机号、邮箱还是登陆名
+				var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+				var phoneReg = /^\d{11}$/;
+				if ($loginName && emailReg.test($loginName.val())) {
+					$('.account').attr('name','email');
+				}else if ($loginName && phoneReg.test($loginName.val())) {
+					$('.account').attr('name','mobilePhone');
+				}
+				
+				Util.mask.set();
+				//提交个人用户表单数据
+				$.ajax({
+					type : "POST",
+					dataType:"json",
+					url : CONTEXTPATH + "/user/userLogin.do",
+					data : $('#loginForm').serialize(),
+					success : function(data) {
+						if(data.data == "LOGINNAME_ERROR") {
+							Util.Tip.warning('账号不存在！');
+							$loginName.focus();
+							Util.mask.clear();
+							return false;
+						}else if(data.data == "PASSWORD_ERROR") {
+							Util.Tip.warning('密码不正确！');
+							$password.focus();
+							Util.mask.clear();
+							return false;
+						}else {
+							Util.Tip.success("登陆成功！");
+							Util.mask.clear();
+				    		window.open(CONTEXTPATH+"/home/home.do", "_self");
+						}
+					},
+					error : function() {  
+						Util.Tip.warning('登陆失败，请检查表单填写是否有误！');
+				    }
+				});
+				//登陆的enter键支持
+				enterEvent();
+			});
+		}
+		
+		return {
+			IndexDataLoad : IndexDataLoad
+		};
+	})();
+	
+	Index._init();
+})();

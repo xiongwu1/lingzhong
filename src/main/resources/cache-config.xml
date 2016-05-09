@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cache>
+    <cache-entry>
+		<entry identify="T_ZL_ZD" description="系统字典表">
+			<dataSql><![CDATA[select DM, MC, JC, SM, PYJP, LXJP, SOURCEID from T_ZL_ZD where yxx = 1 order by px,dm]]></dataSql>
+		</entry>
+	</cache-entry>
+</cache>

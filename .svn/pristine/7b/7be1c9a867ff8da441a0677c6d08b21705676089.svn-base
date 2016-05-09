@@ -1,0 +1,90 @@
+/**	
+ * <br>
+ * Copyright 2015 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.xiongwu.lingzhong.persistence <br>
+ * FileName: LwBlogDao.java <br>
+ * <br>
+ * @version
+ * @author xiongwu@iflytek.com
+ * @created 2016年1月16日
+ * @last Modified 
+ * @history
+ */
+
+package com.xiongwu.lingzhong.persistence;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.iflytek.iframework.orm.Page;
+import com.iflytek.iframework.orm.hibernate.HibernateEntityDao;
+import com.iflytek.iframework.utils.HqlMaker;
+import com.xiongwu.lingzhong.base.SysCode;
+import com.xiongwu.lingzhong.domain.TZlBlog;
+import com.xiongwu.lingzhong.domain.dto.LwBlogListDto;
+import com.xiongwu.utils.HibernateUtil;
+
+/**
+ * 	邻文操作Dao
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2016年1月16日 下午3:28:59
+ *  @lastModified       
+ *  @history           
+ */
+
+public class LwBlogDao extends HibernateEntityDao<TZlBlog>{
+	
+	/**
+	 * hibernate查询工具
+	 */
+	@Autowired
+	public HibernateUtil<LwBlogListDto> hibernateUtil;
+	
+	/**
+	 * 	查询最新的邻文分页结果
+	 *  
+	 *  @param page 分页
+	 *  @return
+	 *  @author xiongwu@iflytek.com
+	 *  @created 2016年1月19日 下午1:55:48
+	 *  @lastModified       
+	 *  @history
+	 */
+	public Page<LwBlogListDto> queryNewLwBlogPage(Page<LwBlogListDto> page){
+		
+		StringBuffer sql = new StringBuffer();
+		
+		 sql.append(" select t1.objectid,t1.content,t1.release_time,t1.release_place,t2.nick_name,t2.head_portrait  ");
+		 sql.append("     from t_zl_blog t1                                                                            ");
+		 sql.append("     left join t_zl_user_person t2                                                                ");
+		 sql.append("     on t1.userid = t2.objectid                                                                   ");
+		 
+		//未删除状态
+		sql.append(HqlMaker.popuHqlEq("t1.delete_staues", SysCode.NO_FLAG));
+		//公开状态
+		sql.append(HqlMaker.popuHqlEq("t1.is_open", SysCode.IS_FLAG));
+		sql.append("order by t1.release_time desc");
+		
+		/*// 总条数
+		page.setTotalCount(super.countSqlResult(sql.toString()));
+		@SuppressWarnings("unchecked")
+		List<LwBlogListDto> list = this
+				.createSqlQuery(sql.toString())
+				.setFirstResult((page.getCurrentPageNo() - 1) * page.getPageSize())
+				.setMaxResults(page.getPageSize())
+				.setResultTransformer(ResultTransformers.aliasToBean(LwBlogListDto.class)).list();
+		// set 结果
+		page.setResult(list);
+		return page;*/
+		
+		return hibernateUtil.findSqlPage(page, sql.toString(),
+				LwBlogListDto.class);
+	}
+	
+
+}
+
+
+
+

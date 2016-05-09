@@ -1,0 +1,196 @@
+(function() {
+	
+	var Home = {
+			_init : function() {
+				window.Home= Home;
+			},
+			HomeIndex : {}
+		};
+	
+	//初始化
+	Home.Base = {
+		Dict : {
+			XB : (function() {
+				return new Util.Dict();
+			})()
+		}
+	};
+	
+	Home.HomeIndex = (function() {
+		
+		//页面加载
+		function HomeIndexLoad() {
+
+			//渲染页面
+			$('body').mask().setMask();
+			$.when(Dao.Dictionary.getDict('XB')).done(function(xb){
+				Home.Base.Dict.XB.Set(xb);
+			}).then(function(){
+				$('body').mask().clearMask();
+				HomeRender();
+			}).fail(function(){
+				$('body').mask().clearMask();
+				window.parent.Util.warn('数据获取失败！');
+			});
+		};
+		
+		//渲染列表页面
+		function HomeRender(){
+			//设置一个定时器，为BUTTON点击事件用
+			var timer=null;
+			var number1=0;
+			
+			//文本框获得焦点和失去焦点时的事件
+			$('.emotion').focus(function(){
+				$(this).css({'border':'1px solid #FA7D3C'});
+				if($(this).val()==''){
+					$(this).siblings('p').html('发言遵守“7条底线”，还可以输入<span>140</span>字').css({'color':'#999','cursor':'','float':'right','font-size':'12px','margin':'5px 5px 0 0'});
+				}
+			}).blur(function(){
+				$(this).css({'border':''});
+				if($(this).val()==''){
+					$(this).css('background-color','white').siblings('p').html('<a href="#"></a>').css({'color':'blue','cursor':'pointer'});
+				}
+			});
+			
+			//文本输入时改变
+			$('.emotion').keyup(function(){
+				if(!$(this).val()==''){
+					$('.release_btn').css({'background-color':'#FF8140'});
+				}else{
+					$('.release_btn').css({'background-color':'#FFC09F'});
+					//$('.release_btn').attr("disabled", "true");
+				}
+				//Math函数向上取值
+				var iNum=Math.ceil(getLength($(this).val())/2);
+				if(iNum<=140){
+					$('.send_weibo p span').html(140-iNum).css('color','#2EFC9D');
+				}else{
+					$('.send_weibo p span').html(iNum-140).css('color','red');
+					$('button').addClass('dis');
+				}
+			});
+			
+			//处理输入的内容是文字还是字母的函数
+			function getLength(str){
+				return String(str).replace(/[^\x00-\xff]/g,'aa').length;
+			};
+			
+			//上传图片下拉框
+			$('.upload_img').click(function() {
+				$('.upload_div').slideDown();
+			});
+			//收缩上传图片下拉框
+			$('.uploadDiv_close').click(function() {
+				$('.upload_div').slideUp();
+			});
+			
+			//绑定按钮事件，当文本框为空时点击背景色会闪动
+			$('.release_btn').click(function(){
+				
+				if ($('.emotion').val() == '') {
+					clearInterval(timer);
+					timer=setInterval(function(){
+						if(number1==4){
+							clearInterval(timer);
+							number1=0;
+						}else{
+							number1++;
+						}
+						if(number1%2){
+							$('.emotion').css('background-color','#FFD9D9');
+						}else{
+							$('.emotion').css('background-color','');
+						}
+					},200);
+					return false;
+				}else{
+					Util.mask.set();
+					//提交个人用户表单数据
+					$.ajax({
+						type : "POST",
+						dataType:"json",
+						url : CONTEXTPATH + "/lwBlog/publishLwBlog.do",
+						contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+						data : $('#publishForm').serialize(),
+						success : function(data) {
+							if (data.data == "SUCCESS") {
+								Util.mask.clear();
+								Util.Tip.sucess('发布成功！');
+								window.open(CONTEXTPATH+"/home/home.do", "_self");
+							}
+						},
+						error : function() {  
+							Util.Tip.warning('发布失败，请冷静思考一下！');
+					    }  
+					});
+					//TODO
+					$('.emotion').val('');
+					$(this).addClass('dis');
+					$('.emotion').blur();
+				}
+			});
+			
+			$(function(){
+				// 初始化插件
+				$("#zyupload").zyUpload({
+					width            :   "650px",                 // 宽度
+					height           :   "400px",                 // 宽度
+					itemWidth        :   "140px",                 // 文件项的宽度
+					itemHeight       :   "115px",                 // 文件项的高度
+					url              :   CONTEXTPATH + "/attach/uploadImg.do",  // 上传文件的路径
+					fileType         :   ["jpg","png","jpeg","gif"],// 上传文件的类型
+					fileSize         :   51200000,                // 上传文件的大小
+					multiple         :   true,                    // 是否可以多个文件上传
+					dragDrop         :   true,                    // 是否可以拖动上传文件
+					tailor           :   true,                    // 是否可以裁剪图片
+					del              :   true,                    // 是否可以删除文件
+					finishDel        :   false,  				  // 是否在上传文件完成后删除预览
+					/* 外部获得的回调接口 */
+					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+						console.info("当前选择了以下图片：");
+						console.info(selectFiles);
+					},
+					onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+						console.info("当前删除了此图片：");
+						console.info(file.name);
+					},
+					onSuccess: function(file, response){          // 文件上传成功的回调方法
+						console.info("此图片上传成功：");
+						console.info(file.name);
+						console.info("此图片上传到服务器地址：");
+						console.info(response);
+						if(eval( "(" + response + ")" ).success == "false") {
+							Util.Tip.warning("图片上传失败！");
+						}
+						//追加返回值imgIdStr
+						var imgIdStr = $('input[name="imgIdStr"]');
+						if (imgIdStr.val() != "") {
+							imgIdStr.val(imgIdStr.val() + "," + eval( "(" + response + ")" ).imgIdStr);
+						}else {
+							imgIdStr.val(eval( "(" + response + ")" ).imgIdStr);
+						}
+						
+					/*	$("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");*/
+					},
+					onFailure: function(file, response){          // 文件上传失败的回调方法
+						Util.Tip.warning("图片上传失败！");
+						console.info("此图片上传失败：");
+						console.info(file.name);
+					},
+					onComplete: function(response){           	  // 上传完成的回调方法
+						Util.Tip.success("上传完成！");
+						console.info("图片上传完成");
+						console.info(response);
+					}
+				});
+			});
+		};
+		
+		return {
+			HomeIndexLoad : HomeIndexLoad
+		};
+	})();
+	
+	Home._init();
+})();

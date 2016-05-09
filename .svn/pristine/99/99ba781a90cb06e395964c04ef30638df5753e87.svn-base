@@ -1,0 +1,14 @@
+(function(_) {
+	var _Dao = _.Dao || {};
+	
+	_Dao.User = { 
+		sendMail: function (email) {
+			return Util.Ajax.post('/register/dynamicpassword.do',{email:email},'text');
+		},
+		clearDyode: function () {
+			return Util.Ajax.post('/register/cleardynamicpassword.do');
+		}
+		
+	};
+	_.Dao = _Dao;
+})(window || {});

@@ -1,0 +1,47 @@
+/**	
+ * <br>
+ * Copyright 2015 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.xiongwu.lingzhong.service <br>
+ * FileName: IZlBlogOperateService.java <br>
+ * <br>
+ * @version
+ * @author xiongwu@iflytek.com
+ * @created 2016年2月1日
+ * @last Modified 
+ * @history
+ */
+
+package com.xiongwu.lingzhong.service;
+
+import com.xiongwu.utils.dto.ResultDto;
+
+/**
+ * 	
+ *  邻文操作接口
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2016年2月1日 下午2:10:21
+ *  @lastModified       
+ *  @history           
+ */
+
+public interface IZlBlogOperateService {
+	
+	/**
+	 * 	收藏邻文操作
+	 *  
+	 *  @param lwBlogId 邻文ID
+	 *  @param userId 当前用户ID
+	 *  @return
+	 *  @author xiongwu@iflytek.com
+	 *  @created 2016年2月1日 下午2:35:03
+	 *  @lastModified       
+	 *  @history
+	 */
+	public ResultDto saveLwCollection(String lwBlogId,String userId);
+}
+
+
+
+

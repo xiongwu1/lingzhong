@@ -1,0 +1,92 @@
+/**	
+ * <br>
+ * Copyright 2011 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.iflytek.op.base <br>
+ * FileName: BasicSysCodeManager.java <br>
+ * <br>
+ * @version
+ * @author xsding@iflytek.com
+ * @created 2014-5-26
+ * @last Modified 
+ * @history
+ */
+package com.xiongwu.lingzhong.base;
+
+/**
+ * 	系统配置注入类
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2015年12月10日 下午2:18:39
+ *  @lastModified       
+ *  @history
+ */
+public class BasicSysCodeManager {
+
+	/**
+	 * 邮件服务器
+	 */
+	private String Host;
+	
+	/**
+	 * 邮箱登陆账号
+	 */
+	private String SendName;
+	
+	/**
+	 * 发件人邮箱的登录密码
+	 */
+	private String SendPassword;
+	
+	/**
+	 *  发件人名称
+	 */
+	private String Sender;
+	
+	
+	/**
+	 * 邮件主题
+	 */
+	private String subject;
+	
+	
+	public String getHost() {
+		return Host;
+	}
+
+	public void setHost(String host) {
+		Host = host;
+	}
+
+	public String getSendName() {
+		return SendName;
+	}
+
+	public void setSendName(String sendName) {
+		SendName = sendName;
+	}
+
+	public String getSendPassword() {
+		return SendPassword;
+	}
+
+	public void setSendPassword(String sendPassword) {
+		SendPassword = sendPassword;
+	}
+
+	public String getSender() {
+		return Sender;
+	}
+
+	public void setSender(String sender) {
+		Sender = sender;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+}

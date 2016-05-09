@@ -1,0 +1,84 @@
+/**	
+ * <br>
+ * Copyright 2015 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.xiongwu.lingzhong.service.impl <br>
+ * FileName: LwBlogServiceImpl.java <br>
+ * <br>
+ * @version
+ * @author xiongwu@iflytek.com
+ * @created 2016年1月16日
+ * @last Modified 
+ * @history
+ */
+
+package com.xiongwu.lingzhong.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.xiongwu.lingzhong.base.Message;
+import com.xiongwu.lingzhong.base.SysCode;
+import com.xiongwu.lingzhong.domain.TZlBlog;
+import com.xiongwu.lingzhong.domain.TZlImage;
+import com.xiongwu.lingzhong.domain.dto.LwBlogDto;
+import com.xiongwu.lingzhong.persistence.AttachmentDao;
+import com.xiongwu.lingzhong.persistence.LwBlogDao;
+import com.xiongwu.lingzhong.service.ILwBlogService;
+import com.xiongwu.utils.DateUtils;
+import com.xiongwu.utils.ResultUtil;
+import com.xiongwu.utils.dto.ResultDto;
+
+/**
+ * 	邻文操作实现类
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2016年1月16日 下午3:27:24
+ *  @lastModified       
+ *  @history           
+ */
+
+public class LwBlogServiceImpl implements ILwBlogService{
+	
+	/**
+	 * 邻文Dao
+	 */
+	@Autowired
+	private LwBlogDao lwBlogDao;
+	
+	/**
+	 * 图片附件Dao
+	 */
+	@Autowired
+	private AttachmentDao attachmentDao;
+	
+	
+	@Override
+	public ResultDto saveLwBlog(LwBlogDto zlBlogDto,String userId,String imgIdStr) {
+		
+		//保存邻文的内容
+		TZlBlog zlBlog = new TZlBlog();
+		zlBlog.setUserid(userId);
+		zlBlog.setContent(zlBlogDto.getContent());
+		zlBlog.setIsOpen(SysCode.IS_FLAG);
+		zlBlog.setReleaseTime(DateUtils.getCurrentGaDate());
+		zlBlog.setReleasePlace("安徽亳州");
+		zlBlog.setDeleteStaues(SysCode.NO_FLAG);
+		lwBlogDao.saveOrUpdate(zlBlog);
+		
+		if (imgIdStr != null) {
+			//将邻文的ID更新到图片表中
+			String[] imgId = imgIdStr.split(",");
+	        for (int i = 0; i < imgId.length; i++) {
+	        	TZlImage zlImage = attachmentDao.queryImgByImgId(imgId[i]);
+	            zlImage.setBlogid(zlBlog.getObjectid());
+	            attachmentDao.saveOrUpdate(zlImage);
+	        }
+		}
+		
+		return ResultUtil.success(Message.SUCCESS);
+	}
+}
+
+
+
+

@@ -1,0 +1,154 @@
+.body-list-scroll {
+	OVERFLOW: hidden
+}
+.body-list-scroll .table-list {
+	WIDTH: auto; MIN-WIDTH: 100%
+}
+.nice-scroll {
+	OVERFLOW: hidden
+}
+.service-list {
+	OVERFLOW: hidden; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; MAX-HEIGHT: 88px
+}
+.service-list LI {
+	WIDTH: 400px; /*FLOAT: left;*/ MARGIN: 5px 20px; LINE-HEIGHT: 14px
+}
+.service-list LI .title {
+	DISPLAY: block; MARGIN-RIGHT: 40px
+}
+.service-list LI .icon {
+	HEIGHT: 16px; WIDTH: 16px; BACKGROUND-IMAGE: url(../img/service-list-icon.png); FLOAT: right; MARGIN: 0px 2px; DISPLAY: block
+}
+.service-list LI .icon-disable {
+	BACKGROUND-POSITION: 0px 0px
+}
+.service-list LI .icon-delete {
+	BACKGROUND-POSITION: 0px -16px
+}
+.service-list LI .icon-enable {
+	BACKGROUND-POSITION: 0px -32px
+}
+.service-list LI .icon-stop {
+	BACKGROUND-POSITION: 0px -48px
+}
+.tab-content {
+	PADDING-BOTTOM: 30px; PADDING-TOP: 0px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px
+}
+.form-btn-after {
+	FLOAT: right
+}
+.form-btn-after-inner {
+	POSITION: absolute; MARGIN-LEFT: -40px
+}
+.regtime-item {
+	PADDING-BOTTOM: 6px; PADDING-TOP: 6px; PADDING-LEFT: 50px; PADDING-RIGHT: 0px
+}
+.regtime-item LABEL {
+	WIDTH: 100px; DISPLAY: inline-block
+}
+.form-regtime {
+	WIDTH: 400px; VERTICAL-ALIGN: middle; ZOOM: 1; MARGIN: 0px; DISPLAY: inline
+}
+.ser-params {
+	POSITION: relative
+}
+.ser-params-add {
+	CURSOR: pointer; HEIGHT: 24px; WIDTH: 20px; BACKGROUND: url(../img/icon-add.png) #fff no-repeat 0px 2px; RIGHT: 2px; POSITION: absolute; MARGIN-TOP: -12px; TOP: 50%
+}
+.params_div {
+	OVERFLOW: hidden; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; MAX-HEIGHT: 88px
+}
+.params_div .params {
+	WIDTH: 160px; FLOAT: left; MARGIN: 5px 20px; DISPLAY: block
+}
+.params_div .params SPAN {
+	MARGIN: 0px 20px 0px 0px; DISPLAY: block
+}
+.params_div .params .close {
+	HEIGHT: 16px; WIDTH: 16px; BACKGROUND: url(../img/service-list-icon.png) no-repeat 0px -16px; FLOAT: right; DISPLAY: block; TEXT-INDENT: -9999px
+}
+.tab-title .icon {
+	BACKGROUND: url(../img/tab-icon.png) no-repeat
+}
+.tab-title .icon-base {
+	BACKGROUND-POSITION: 0px 0px
+}
+.tab-title .icon-version {
+	BACKGROUND-POSITION: 0px -16px
+}
+.tab-title .icon-call {
+	BACKGROUND-POSITION: 0px -32px
+}
+/*样式重写 update by zfli2*/
+.form-btn{
+	margin-right:0;
+	text-align:center;
+}
+.no-border{
+	border:none;
+}
+/* 在线编辑指南样式 */
+.ke-statusbar-right-icon{
+	display: none!important;
+}
+.edit-guide-wrap{
+	position:relative;
+	padding:5px;
+	overflow: hidden;
+	zoom:1;
+}
+.img-preview{
+	margin:0 auto;
+	width: 300px;
+	text-align: center;
+}
+.img-preview .name{
+	cursor: pointer;
+}
+.img-preview .delete{
+	
+}
+.img-preview .preview{
+	
+}
+.option-guide-wrap{
+	padding:0 5px;
+	height: 30px;
+}
+.edit-guide-btn{
+	width:200px;
+	float: right;
+}
+.img-fullsize{
+	margin-top: 10px;
+	text-align: center;
+}
+body[showtype]{
+	background: #f9f9f9;
+}
+/* update */
+#emForm, #pmForm{
+	padding:0 10px;
+	zoom:1;
+}
+/* 添加事项大类  */
+.add-event-class{
+	position:absolute;
+	top: 5px;
+	right: -25px;
+	width: 20px;
+	height: 20px;
+	background: url(../images/icon_add_node.png) 50% 50% no-repeat;
+	cursor: pointer;
+}
+.add-event-class-inner{
+	padding:10px;
+	width: 280px;
+}
+.add-event-class-inner .form-control{
+	margin-right: 0;
+}
+
+#companyTab{
+	padding-bottom: 0px;
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+<Configure id='wac' class="org.mortbay.jetty.webapp.WebAppContext">
+<New id="DSTest" class="org.mortbay.jetty.plus.naming.Resource">  
+    <Arg>jdbc/casdb</Arg>   
+    <Arg>
+     <New class="oracle.jdbc.pool.OracleConnectionPoolDataSource">
+         <Set name="URL">jdbc:oracle:thin:@192.168.3.5:1521:orcl</Set>   
+         <Set name="User">zl_test</Set>
+         <Set name="Password">iflytek</Set>
+     </New>
+    </Arg>
+</New>
+</Configure>

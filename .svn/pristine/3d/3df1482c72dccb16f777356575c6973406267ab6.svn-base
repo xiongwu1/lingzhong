@@ -1,0 +1,64 @@
+/**	
+ * <br>
+ * Copyright 2015 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.xiongwu.lingzhong.persistence <br>
+ * FileName: ZlBlogOperate.java <br>
+ * <br>
+ * @version
+ * @author xiongwu@iflytek.com
+ * @created 2016年1月23日
+ * @last Modified 
+ * @history
+ */
+
+package com.xiongwu.lingzhong.persistence;
+
+import com.iflytek.iframework.orm.hibernate.HibernateEntityDao;
+import com.iflytek.iframework.utils.HqlMaker;
+import com.xiongwu.lingzhong.base.SysCode;
+import com.xiongwu.lingzhong.domain.TZlBlogOperate;
+
+/**
+ * 	邻文操作Dao
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2016年1月23日 下午4:15:43
+ *  @lastModified       
+ *  @history           
+ */
+
+public class ZlBlogOperateDao extends HibernateEntityDao<TZlBlogOperate> {
+
+	
+	/**
+	 * 	根据邻文ID统计点赞数量
+	 *  
+	 *  @param lwBlogId 邻文ID
+	 *  @return
+	 *  @author xiongwu@iflytek.com
+	 *  @created 2016年1月23日 下午4:24:24
+	 *  @lastModified       
+	 *  @history
+	 */
+	public int queryLwLikeSum(String lwBlogId) {
+		
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append(" select count(1) from t_zl_blog_operate t1               ");
+		sql.append(" where 1=1        ");
+		
+		//查询条件：邻文ID
+		sql.append(HqlMaker.popuHqlEq("t1.blogid", lwBlogId));
+		//操作类型：赞
+		sql.append(HqlMaker.popuHqlEq("t1.operate_type", SysCode.IS_FLAG));
+		//未删除
+		sql.append(HqlMaker.popuHqlEq("t1.delete_staues", SysCode.NO_FLAG));
+		
+		return (int) super.countSqlResult(sql.toString());
+	}
+}
+
+
+
+

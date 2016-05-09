@@ -1,0 +1,35 @@
+/**	
+ * <br>
+ * Copyright 2015 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.xiongwu.lingzhong.persistence <br>
+ * FileName: UserDao.java <br>
+ * <br>
+ * @version
+ * @author xiongwu@iflytek.com
+ * @created 2015年12月5日
+ * @last Modified 
+ * @history
+ */
+
+package com.xiongwu.lingzhong.persistence;
+
+import com.iflytek.iframework.orm.hibernate.HibernateEntityDao;
+import com.xiongwu.lingzhong.domain.TZlUserPerson;
+
+/**
+ * 	注册用户Dao
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2015年12月5日 下午4:50:46
+ *  @lastModified       
+ *  @history           
+ */
+
+public class UserDao extends HibernateEntityDao<TZlUserPerson>{
+
+}
+
+
+
+

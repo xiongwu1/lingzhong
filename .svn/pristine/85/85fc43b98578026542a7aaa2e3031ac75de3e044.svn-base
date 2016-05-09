@@ -1,0 +1,166 @@
+(function(_) {
+	var _Module = _.Module || {};
+
+	// 字典
+	_Module.Dictionary = (function() {
+		var mod = 'dictionary';
+		return {
+			name : '获取字典项',
+			dao : getDao(mod)
+		};
+	})();
+
+	// 注册用户
+	_Module.user = (function() {
+		var mod = 'user';
+		return {
+			name : '用户',
+			src : getSrc('user/' + mod),
+			dao : getDao(mod),
+			model : getModel(mod),
+			dependency : [ _Module.Dictionary ]
+		};
+	})();
+
+	// 登陆后主页
+	_Module.home = (function() {
+		var mod = 'home';
+		return {
+			name : '登陆后主页',
+			src : getSrc('home/' + mod),
+			dao : getDao(mod),
+			model : getModel(mod),
+			dependency : [ _Module.Dictionary ]
+		};
+	})();
+
+	/*// 小微企业用户
+	_Module.bankconf = (function() {
+		var mod = 'financialco';
+		return {
+			name : '融资机构管理',
+			src : getSrc('financialco/bankconf'),
+			dao : getDao(mod),
+			model : getModel(mod),
+			dependency : [ _Module.Dictionary ]
+		};
+	})();
+
+	// 用户日志查询
+	_Module.userlog = (function() {
+		var mod = 'userlog';
+		return {
+			name : '日志查询',
+			src : getSrc('userlog/' + mod),
+			dao : getDao('userlog'),
+			model : getModel('userlog'),
+			dependency : [ _Module.Dictionary ]
+		};
+	})();
+
+	// 我的聊天查询
+	_Module.roomList = (function() {
+		var mod = 'roomList';
+		return {
+			name : '我的聊天查询',
+			src : getSrc('room/' + mod),
+			dao : getDao('room'),
+			model : getModel('room'),
+			dependency : [ _Module.Dictionary ]
+		};
+	})();
+
+	// 我的聊天详细
+	_Module.roomDetail = (function() {
+		var mod = 'roomDetail';
+		return {
+			name : '我的聊天详细',
+			src : getSrc('room/' + mod),
+			dao : getDao('room'),
+			model : getModel('room'),
+			dependency : [ _Module.Dictionary ]
+		};
+	})();
+	
+	// 个人融资信息新增
+	_Module.personApply = (function() {
+		var mod = 'personApply';
+		return {
+			name : '个人申请',
+			src : getSrc('person/' + mod),
+			dao : getDao('personApply'),
+			model : getModel('personApply'),
+			dependency : [ _Module.Dictionary ]
+		};
+	})();
+	
+	// 企业申请
+	_Module.comApply = (function() {
+		var mod = 'comApply';
+		return {
+			name: '企业申请',
+			src: getSrc('company/' + mod),
+			dao: getDao(mod),
+			model: getModel(mod)
+		}
+	})();
+	
+	// 离线需求详细
+	_Module.demandDetail = (function() {
+		var mod = 'demandDetail';
+		return {
+			name: '离线需求详细',
+			src: getSrc('room/' + mod),
+			model: getModel(mod)
+		}
+	})();
+
+	// 字典查询
+	_Module.dictionaryList = (function() {
+		var mod = 'dictionaryList';
+		return {
+			name : '字典查询',
+			src : getSrc('dictionary/' + mod),
+			dao : getDao('dictionary'),
+			model : getModel('dictionary')
+		};
+	})();
+
+	// 字典新增
+	_Module.dictionaryAdd = (function() {
+		var mod = 'dictionaryAdd';
+		return {
+			name : '字典新增',
+			src : getSrc('dictionary/' + mod),
+			dao : getDao('dictionary'),
+			model : getModel('dictionary')
+		};
+	})();
+
+	// 消息列表
+	_Module.message = (function() {
+		var mod = 'message';
+		return {
+			name : '消息列表',
+			src : getSrc('message/' + mod),
+			dao : getDao(mod),
+			model : getModel(mod)
+		};
+	})();*/
+	/*---------------------------------------------------------------------------
+	 * 定义js获取路径
+	 *---------------------------------------------------------------------------*/
+	function getDao(m) {
+		return CONTEXTPATH + '/resources/scripts/dao/' + m + '.js';
+	}
+	
+	function getModel(m) {
+		return CONTEXTPATH + '/resources/scripts/model/' + m + '.js';
+	}
+
+	function getSrc(m) {
+		return CONTEXTPATH + '/resources/scripts/ui/' + m + '.js';
+	}
+
+	_.Module = _Module;
+})(window);

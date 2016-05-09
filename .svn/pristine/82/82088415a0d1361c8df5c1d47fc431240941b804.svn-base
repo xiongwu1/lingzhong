@@ -1,0 +1,118 @@
+/**	
+ * <br>
+ * Copyright 2015 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.xiongwu.lingzhong.domain.dto <br>
+ * FileName: LwBlogListDto.java <br>
+ * <br>
+ * @version
+ * @author xiongwu@iflytek.com
+ * @created 2016年1月20日
+ * @last Modified 
+ * @history
+ */
+
+package com.xiongwu.lingzhong.domain.dto;
+
+/**
+ * 邻文列表Dto
+ * 
+ * @author xiongwu@iflytek.com
+ * @created 2016年1月20日 下午12:38:51
+ * @lastModified
+ * @history
+ */
+
+public class LwBlogListDto {
+
+	/**
+	 * 昵称
+	 */
+	private String nickName;
+
+	/**
+	 * 头像
+	 */
+	private String headPortrait;
+
+	/**
+	 * 邻文内容
+	 */
+	private String content;
+
+	/**
+	 * 发布时间
+	 */
+	private String releaseTime;
+	
+	/**
+	 * 发布地点
+	 */
+	private String releasePlace;
+
+	/**
+	 * 图片路径
+	 */
+	private String pictureUrl;
+
+	/**
+	 * 图片名称
+	 */
+	private String imageName;
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getHeadPortrait() {
+		return headPortrait;
+	}
+
+	public void setHeadPortrait(String headPortrait) {
+		this.headPortrait = headPortrait;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getReleaseTime() {
+		return releaseTime;
+	}
+
+	public void setReleaseTime(String releaseTime) {
+		this.releaseTime = releaseTime;
+	}
+	
+	public String getReleasePlace() {
+		return releasePlace;
+	}
+
+	public void setReleasePlace(String releasePlace) {
+		this.releasePlace = releasePlace;
+	}
+
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+}

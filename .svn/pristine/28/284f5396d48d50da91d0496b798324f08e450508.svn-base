@@ -1,0 +1,100 @@
+/**	
+ * <br>
+ * Copyright 2015 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.xiongwu.lingzhong.service.impl <br>
+ * FileName: UserServiceImpl.java <br>
+ * <br>
+ * @version
+ * @author xiongwu@iflytek.com
+ * @created 2015年12月5日
+ * @last Modified 
+ * @history
+ */
+
+package com.xiongwu.lingzhong.service.impl;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.xiongwu.lingzhong.base.Message;
+import com.xiongwu.lingzhong.base.SysCode;
+import com.xiongwu.lingzhong.domain.TZlUserPerson;
+import com.xiongwu.lingzhong.persistence.UserDao;
+import com.xiongwu.lingzhong.service.IUserService;
+import com.xiongwu.utils.DateUtils;
+import com.xiongwu.utils.MD5Util;
+import com.xiongwu.utils.ResultUtil;
+import com.xiongwu.utils.StringUtil;
+import com.xiongwu.utils.dto.ResultDto;
+
+/**
+ * 	注册用户接口实现类
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2015年12月5日 下午4:49:27
+ *  @lastModified       
+ *  @history           
+ */
+
+public class UserServiceImpl implements IUserService {
+
+	
+	@Autowired
+	private UserDao userDao;
+	
+	//log
+	private Logger log = Logger.getLogger(this.getClass());
+	
+	/**
+	 * 注册个人用户，返回相应的错误码
+	 * 1、校验身份证号、登录名唯一性
+	 * 2、检验图片是否已上传
+	 * 3、校验短信验证码是否正确
+	 * 4、保存用户信息
+	 * 5、将个人用户照片关联到用户对象上
+	 * 
+	 * @param user 个人用户信息
+	 * @param imageId 上传的图片ID
+	 * @return
+	 */
+	public ResultDto registerUser(TZlUserPerson user, String phoneValidateCode, String imageId,String sessionId) {
+
+		//校验登录名唯一性
+		if(!userDao.verifyUserInfo(SysCode.USER.CLASSNAME, SysCode.USER.LOGINNAME, user.getLoginName())){
+			return ResultUtil.fail(Message.LOGINNAME_NONUNIQUE);
+		}
+		
+		//短信验证码
+		if(!StringUtil.equals(phoneValidateCode, user.getPhoneValidateCode())){
+			log.info("#########短信验证码不一致############从session获取【"+sessionId+"】：【"+phoneValidateCode+"】,页面传递：【"+user.getPhoneValidateCode()+"】");			
+			return ResultUtil.fail(Message.PHONE_RANDOM_ERROR);
+		}
+		//保存用户信息
+		if(StringUtils.isEmpty(user.getObjectid())){
+			user.setRegisteredTime(DateUtils.getCurrentGaDate());
+			user.setUpdateTime(DateUtils.getCurrentGaDate());
+			user.setUserType(SysCode.USER_TYPE.REGISTER);
+			user.setPassword(MD5Util.fiveEncode(user.getPassword()));
+			userDao.save(user);
+		}else{
+			user.setUpdateTime(DateUtils.getCurrentGaDate());
+			userDao.saveOrUpdate(user);
+		}
+		if(StringUtils.isNotBlank(imageId)){
+			//将个人用户照片关联到用户对象上
+			/*UserImage userImage = userImageDao.findUniqueBy("id", imageId);
+			if(userImage != null){
+				userImage.setUserId(user.getId());
+				userImage.setUserType(SysCode.USER_PERSON.USER_TYPE_PERSON);
+				userImageDao.saveOrUpdate(userImage);*/
+			}
+		return ResultUtil.success(Message.REGISTER_SUCCESS);
+	}
+
+}
+
+
+
+

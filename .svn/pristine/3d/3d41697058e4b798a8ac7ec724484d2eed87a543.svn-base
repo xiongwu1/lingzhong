@@ -1,0 +1,19 @@
+$(".tab-1").click(function() {
+	$(".tab-2").removeClass("active");
+	$(this).addClass("active");
+	$(".main-content").css({
+		"background": $(this).data("bg-color")
+	})
+	$(".findpw_tel").show();
+	$(".findpw_email").hide();
+});
+
+$(".tab-2").click(function() {
+	$(".tab-1").removeClass("active");
+	$(this).addClass("active");
+	$(".main-content").css({
+		"background": $(this).data("bg-color")
+	});
+	$(".findpw_email").show();
+	$(".findpw_tel").hide();
+});

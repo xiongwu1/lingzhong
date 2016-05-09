@@ -1,0 +1,35 @@
+/**	
+ * <br>
+ * Copyright 2015 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.xiongwu.lingzhong.persistence <br>
+ * FileName: LwBlogDao.java <br>
+ * <br>
+ * @version
+ * @author xiongwu@iflytek.com
+ * @created 2016年1月16日
+ * @last Modified 
+ * @history
+ */
+
+package com.xiongwu.lingzhong.persistence;
+
+import com.iflytek.iframework.orm.hibernate.HibernateEntityDao;
+import com.xiongwu.lingzhong.domain.TZlBlog;
+
+/**
+ * 	邻文操作Dao
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2016年1月16日 下午3:28:59
+ *  @lastModified       
+ *  @history           
+ */
+
+public class LwBlogDao extends HibernateEntityDao<TZlBlog>{
+
+}
+
+
+
+

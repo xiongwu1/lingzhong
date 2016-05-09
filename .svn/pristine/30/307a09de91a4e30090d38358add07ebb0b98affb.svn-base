@@ -1,0 +1,198 @@
+@CHARSET "UTF-8";
+
+.personal_cover {
+	width: 944px;
+	height: 300px;
+	margin: 75px auto 0;
+	background-image: url('../../images/home/personal_cover_bg.jpg');
+}
+
+.pf_photo {
+	width: 100%;
+	height: 50%;
+	border:1px solid;
+	border-color: transparent;
+}
+
+/* ----    圆形头像的制作开始   ----- */
+.pf_photo figure div {
+	width: 100px;
+	height: 100px;
+	border-radius: 100px;
+	overflow: hidden;
+	margin: 50px auto 0;
+}
+
+.pf_photo img {
+	width: 100%;
+	min-height: 100%;
+	text-align: center;
+}
+ /* ----    圆形头像的制作结束   ----- */
+ 
+.pf_username {
+	width: 100%;
+	height: 30px;
+}
+ 
+.pf_username span{
+	margin-left:410px;
+	color: #fff;
+	font-size: 22px;
+}
+
+.pf_gxqm {
+	width: 100%;
+	height: 30px;
+}
+
+.pf_gxqm span {
+	margin-left: 370px;
+	color: #fff;
+	font-size: 14px;
+}
+
+.personal_menu {
+	width: 944px;
+	height: 25px;
+	background-color: #fff;
+	margin: auto;
+	padding: 7px 0;
+}
+
+.personal_menu a {
+	color: #333333;
+	margin: 10px 0 0 430px;
+}
+ 
+.personal_material {
+	width: 944px;
+	height: 800px;
+	margin: 20px auto;
+}
+
+.personal_left {
+	width: 285px;
+	height: 60px;
+	float: left;
+}
+
+/* ------微博关注CSS开始----------*/
+/* ul li以横排显示 */
+
+/* 所有class为menu的div中的ul样式 */
+div.personal_atten ul {
+	list-style: none; /* 去掉ul前面的符号 */
+	margin: 0px; /* 与外界元素的距离为0 */
+	padding: 0px; /* 与内部元素的距离为0 */
+	width: auto; /* 宽度根据元素内容调整 */
+}
+/* 所有class为menu的div中的ul中的li样式 */
+div.personal_atten ul li {
+	float: left; /* 向左漂移，将竖排变为横排 */
+}
+
+div.personal_atten ul li strong {
+    display: block;
+    font-weight: bold;
+    line-height: 18px;
+    width: 23px;
+    overflow: hidden;
+}
+
+/* 所有class为menu的div中的ul中的a样式(包括尚未点击的和点击过的样式) */
+div.personal_atten ul li a, div.user_atten ul li a:visited {
+	background-color: #FFFFFF; /* 背景色 */
+	border-right: 1px #D9D9D9 solid; /* 边框 */
+	color: #9F8FB3; /* 文字颜色 */
+	font-size: 10px; display : block; /* 此元素将显示为块级元素，此元素前后会带有换行符 */
+	line-height: 1.35em; /* 行高 */
+	padding: 13px 35px; /* 内部填充的距离 */
+	text-decoration: none; /* 不显示超链接下划线 */
+	white-space: nowrap;
+	display: block; /* 对于文本内的空白处，不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。 */
+}
+/* 所有class为menu的div中的ul中的a样式(鼠标移动到元素中的样式) */
+div.personal_atten ul li a:hover {
+	color: #EA724E; /* 文字颜色 */
+	text-decoration: none; /* 不显示超链接下划线 */
+}
+/* 所有class为menu的div中的ul中的a样式(鼠标点击元素时的样式) */
+div.user_atten ul li a:active {
+	color: #cfdbe6; /* 文字颜色 */
+	text-decoration: none; /* 不显示超链接下划线 */
+}
+
+/* ------微博关注CSS结束----------*/
+
+.personal_right {
+	width: 636px;
+	height: 700px;
+	float: left;
+	margin-left:20px; 
+	background-color: #fff;
+}
+
+.basic_title {
+	width: 100%;
+	height: 70%;
+}
+
+.contact_title {
+	width: 100%;
+	height: 30%;
+}
+
+.basic_tip {
+	width: 100%;
+	height: 50px;
+}
+
+.basic_tip span {
+	float: left;
+	margin: 20px 0 0  19px;
+	color: #3E1E1E;
+}
+
+.basic_tip hr {
+	float: right;
+	width:84%;
+	margin: 31px 0 0 15px;
+	color: #BCBCBC;
+}
+
+.basic_tip a {
+	float: right;
+	font-size: 13px;
+	padding: 3px 5px;
+	background-color: #F7F7F7;
+	border-radius:6px;
+	border: 1px solid #D2D2D2;
+	vertical-align: middle;
+}
+
+.personal_basic {
+	width: 100%;
+	height: 35px;
+	padding: 3px 0;
+}
+
+.basic_name {
+	width:60px;
+	font-size: 13px;
+	color: #808080;
+	float: left;
+	margin: 10px 20px 0 25px;
+}
+
+.basic_name span{
+	float: right;
+}
+
+.basic_content {
+	width:300px;
+	font-size: 13px;
+	color: #3E1E1E;
+	float: left;
+	margin: 10px 0 0 20px;
+} 

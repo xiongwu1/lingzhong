@@ -1,0 +1,47 @@
+/**	
+ * <br>
+ * Copyright 2015 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.xiongwu.lingzhong.service <br>
+ * FileName: IUserService.java <br>
+ * <br>
+ * @version
+ * @author xiongwu@iflytek.com
+ * @created 2015年12月5日
+ * @last Modified 
+ * @history
+ */
+
+package com.xiongwu.lingzhong.service;
+
+import com.xiongwu.lingzhong.domain.TZlUserPerson;
+import com.xiongwu.utils.dto.ResultDto;
+
+/**
+ *  注册用户接口
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2015年12月5日 下午4:48:52
+ *  @lastModified       
+ *  @history           
+ */
+
+public interface IUserService {
+	
+	/**
+	 * 	注册用户，返回相应的错误码
+	 *  
+	 *  @param user 用户信息
+	 *  @return
+	 *  @author xiongwu@iflytek.com
+	 *  @created 2015年12月5日 下午4:54:22
+	 *  @lastModified       
+	 *  @history
+	 */
+	ResultDto registerUser(TZlUserPerson user);
+
+}
+
+
+
+

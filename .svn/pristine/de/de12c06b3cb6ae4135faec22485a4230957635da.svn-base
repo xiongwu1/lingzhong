@@ -1,0 +1,88 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/view/inc/header.jsp"%>
+<link href="${ctx}/resources/css/home/personalCenter.css" rel="stylesheet" />
+
+<div class="personal_cover">
+	<div class="pf_photo">
+		<figure>
+			<div>
+				<img src="${ctx}/resources/images/index/head.jpg" />
+			</div>
+		</figure>
+	</div>
+	<div class="pf_username">
+		<span>易先生3729</span>
+	</div>
+	<div class="pf_gxqm">
+		<span>美好的生活需要自己去努力创造！</span>
+	</div>
+</div>
+<div class="personal_menu">
+	<span><a href="javascript:void();">我的主页</a></span>
+</div>
+
+<div class="personal_material">
+	<div class="personal_left">
+		<div class="personal_atten">
+			<ul>
+				<li><a href="javascript:void(0);"><strong>123</strong><span class="atten_txt">关注</span></a></li>
+				<li><a href="javascript:void(0);"><strong>123</strong><span class="atten_txt">粉丝</span></a></li>
+				<li><a href="javascript:void(0);"><strong>123</strong><span class="atten_txt">邻文</span></a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="personal_right">
+		<div class="basic_title">
+			<div class="basic_tip">
+				<span>基本信息</span><hr /><a href="javascript:void();">编辑</a>	
+			</div>
+			<div class="personal_basic">
+				<div class="basic_name"><span>登陆名</span></div><div class="basic_content">152*****820</div>
+			</div>
+			<div class="personal_basic">
+				<div class="basic_name"><span>昵  称</span></div><div class="basic_content">易先生3729</div>
+			</div>
+			<div class="personal_basic">
+				<div class="basic_name"><span>真实姓名</span></div><div class="basic_content">吴雄</div>
+			</div>
+			<div class="personal_basic">
+				<div class="basic_name"><span>所在地</span></div><div class="basic_content">安徽 芜湖</div>
+			</div>
+			<div class="personal_basic">
+				<div class="basic_name"><span>性  别</span></div><div class="basic_content">男</div>
+			</div>
+			<div class="personal_basic">
+				<div class="basic_name"><span>性取向</span></div><div class="basic_content">异性恋</div>
+			</div>
+			<div class="personal_basic">
+				<div class="basic_name"><span>感情状况</span></div><div class="basic_content">单身</div>
+			</div>
+			<div class="personal_basic">
+				<div class="basic_name"><span>生日</span></div><div class="basic_content">1993-07-21</div>
+			</div>
+			<div class="personal_basic">
+				<div class="basic_name"><span>血型</span></div><div class="basic_content">O</div>
+			</div>
+			<div class="personal_basic">
+				<div class="basic_name"><span>个性签名</span></div><div class="basic_content">美好的生活需要自己去努力创造！</div>
+			</div>
+		</div>
+		<div class="contact_title">
+			<div class="basic_tip">
+				<span>联系信息</span><hr /><a href="javascript:void();">编辑</a>
+			</div>
+			<div class="personal_basic">
+				<div class="basic_name"><span>邮箱</span></div><div class="basic_content">129203271@qq.com</div>
+			</div>
+			<div class="personal_basic">
+				<div class="basic_name"><span>QQ</span></div><div class="basic_content">1129203271</div>
+			</div>
+			<div class="personal_basic">
+				<div class="basic_name"><span>手机号</span></div><div class="basic_content">15256273820</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%@ include file="/WEB-INF/view/inc/footer.jsp"%>

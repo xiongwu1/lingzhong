@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>MDM Properties XML</comment>
+	<!-- =========================================== -->
+	<!-- 以下是 Hibernate 配置，不用修改 -->
+	<!-- =========================================== -->
+	<entry key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</entry>
+	<entry key="hibernate.show_sql">true</entry>
+	<entry key="hibernate.format_sql">true</entry>
+	<entry key="hibernate.ehcache_config_file">/ehcache/ehcache-hibernate-local.xml</entry>
+
+	<!-- 系统数据源名称，部署时候调整 -->
+	<entry key="lingzhong.datasource.jndi.name">java:comp/env/jdbc/casdb</entry>
+	<entry key="interface.secretKey">E9DA036F58B724C1</entry>
+	
+	<!-- 邮箱参数设置 -->
+	<entry key="host">smtp.sina.cn</entry>
+	<entry key="sendName">xiongwu3271@sina.cn</entry>
+	<entry key="sendPassword">doct287439</entry>
+	<entry key="sender">xiongwu3271@sina.cn</entry>
+	<entry key="subject">欢迎注册众邻-在线云社交平台</entry>
+	
+	<!-- Jedis config 和 pool 配置  -->
+	<entry key="jedis.pool.maxActive">200</entry>
+	<entry key="jedis.pool.maxIdle">100</entry>
+	<entry key="jedis.pool.maxWait">500</entry>
+	<entry key="jedis.pool.testOnBorrow">true</entry>
+	<entry key="jedis.pool.host">192.168.1.110</entry>
+	<entry key="jedis.pool.port">6378</entry>
+	<entry key="jedis.pool.timeout">-1</entry>
+	<entry key="jedis.pool.password">foobared</entry>
+	<entry key="jedis.pool.redisIndex">7</entry>
+	
+	<!-- 头像图片保存路径和格式-->
+	<entry key="uploadHeadUrl">D:/lingzhong/</entry>
+	<entry key="imgFormat">.jpg/</entry>
+	
+</properties>

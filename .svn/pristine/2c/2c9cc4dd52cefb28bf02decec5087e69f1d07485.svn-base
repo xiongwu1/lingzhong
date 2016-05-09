@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+			<div class="cp-footer no-bg">
+				<div class="corner corner-lb"></div>
+				<div class="corner corner-rb"></div>
+			</div>
+		</div>
+	</div>
+	<div class="shadow"></div>
+	<div class="footer">
+		<p><span>版权所有：</span><em>亳州市人民政府</em><span>建设单位：</span><em>亳州市人民政府办公室</em></p>
+	</div>
+</div>
+</body>
+</html>

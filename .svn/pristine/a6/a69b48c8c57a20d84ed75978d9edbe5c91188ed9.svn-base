@@ -1,0 +1,98 @@
+(function(_) {
+	var _Module = _.Module || {};
+
+	// 字典
+	_Module.Dictionary = (function() {
+		var mod = 'dictionary';
+		return {
+			name : '获取字典项',
+			dao : getDao(mod)
+		};
+	})();
+	
+	// 首页
+	_Module.index = (function() {
+		var mod = 'index';
+		return {
+			name : '首页',
+			src : getSrc('index/' + mod),
+			dao : getDao(mod),
+			model : getModel(mod),
+			dependency : [ _Module.Dictionary ]
+		};
+	})();
+
+	// 注册用户
+	_Module.user = (function() {
+		var mod = 'user';
+		return {
+			name : '用户',
+			src : getSrc('user/' + mod),
+			dao : getDao(mod),
+			model : getModel(mod),
+			dependency : [ _Module.Dictionary ]
+		};
+	})();
+
+	// 登陆后主页
+	_Module.home = (function() {
+		var mod = 'home';
+		return {
+			name : '登陆后主页',
+			src : getSrc('home/' + mod),
+			dao : getDao(mod),
+			model : getModel(mod),
+			dependency : [ _Module.Dictionary ]
+		};
+	})();
+
+	/*
+	// 字典查询
+	_Module.dictionaryList = (function() {
+		var mod = 'dictionaryList';
+		return {
+			name : '字典查询',
+			src : getSrc('dictionary/' + mod),
+			dao : getDao('dictionary'),
+			model : getModel('dictionary')
+		};
+	})();
+
+	// 字典新增
+	_Module.dictionaryAdd = (function() {
+		var mod = 'dictionaryAdd';
+		return {
+			name : '字典新增',
+			src : getSrc('dictionary/' + mod),
+			dao : getDao('dictionary'),
+			model : getModel('dictionary')
+		};
+	})();
+
+	// 消息列表
+	_Module.message = (function() {
+		var mod = 'message';
+		return {
+			name : '消息列表',
+			src : getSrc('message/' + mod),
+			dao : getDao(mod),
+			model : getModel(mod)
+		};
+	})();*/
+	/*---------------------------------------------------------------------------
+	 * 定义js获取路径
+	 *---------------------------------------------------------------------------*/
+	function getDao(m) {
+		return CONTEXTPATH + '/resources/scripts/dao/' + m + '.js';
+	}
+	
+	function getModel(m) {
+		return CONTEXTPATH + '/resources/scripts/model/' + m + '.js';
+	}
+
+	function getSrc(m) {
+		return CONTEXTPATH + '/resources/scripts/ui/' + m + '.js';
+	}
+
+	_.Module = _Module;
+})(window);

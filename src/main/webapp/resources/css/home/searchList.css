@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+.search_div {
+	width: 840px;
+	height: 36px;
+	margin: 80px 0 0 185px;
+}
+.search_input {
+	width: 690px;
+	height: 39px;
+	border-radius:5px;
+	border:0;
+}
+.search_btn {
+	width: 101px;
+	height: 37px;
+	border: 0;
+	border-radius:5px;
+	background-color: #207FC7;
+	color: #fff;
+	margin-left: 10px;
+	cursor:pointer;
+}
+
+。search_btn

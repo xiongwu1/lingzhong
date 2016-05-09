@@ -1,0 +1,161 @@
+(function() {
+	
+	var Index = {
+		_init : function() {
+			window.Index= Index;
+		},
+		IndexData : {}
+	};
+	
+	//初始化
+	Index.Base = {
+	};
+	
+	Index.IndexData = (function() {
+		//页面加载
+		function IndexDataLoad() {
+			//渲染页面
+			$('body').mask().setMask();
+			$.when().done(function(){
+			}).then(function(){
+				IndexDataRender();
+				$('body').mask().clearMask();
+			}).fail(function(){
+				$('body').mask().clearMask();
+				window.parent.Util.warn('数据获取失败！');
+			});
+		};
+		
+		//渲染列表页面
+		function IndexDataRender(){
+			
+			var html = "";
+			var fastdfsUrl = "http://192.168.3.205:8888/";
+			
+			//获取首页最新的邻文列表
+			Util.mask.set();
+			//提交个人用户表单数据
+			$.ajax({
+				type : "POST",
+				dataType:"json",
+				url : CONTEXTPATH + "/NewlwBlogList.do",
+				data : {},
+				success : function(data) {
+					for(var i =0;i<data.rows.length;i++) {
+						html += '<div class="blog_list">';
+						html += '<div class="blog_content">';
+						html += '<div class="head_info">';
+						html += '<div class="head_left">';
+						html += '<figure><div>';
+						if (data.rows[i].headPortrait == '') {
+							html += '<img src="'+ CONTEXTPATH + "/resources/images/default_icon.png" +'"/>';
+						}else {
+							html += '<img src="'+ fastdfsUrl + data.rows[i].headPortrait + '"/>';
+						}
+						html += '</div></figure>';
+						html += '</div><div class="head_right">';
+						html += '<p class="web_name"><b>'+ data.rows[i].nickName +'</b></p>';
+						html += '<p class="web_time">' + Util.date.date14to19(data.rows[i].releaseTime) + '&nbsp;&nbsp;&nbsp;' + data.rows[i].releasePlace + '</p>';
+						html += '</div></div>';
+						html += '<div class="web_info">'+ AnalyticEmotion(data.rows[i].content) +'</div>';
+						
+						if(data.rows[i].imageUrl != "") {
+							html += '<div class="img_info">';
+							html += '<img alt="'+ data.rows[i].imageName +'" src="'+ fastdfsUrl + data.rows[i].imageUrl +'">';
+							html += '</div>';
+						}
+						html += '</div>';
+						html += '<div class="blog_operate">';
+						html += '<ul><li><a href="javascript:void(0);">收藏</a></li><li><a href="javascript:void(0);">转发</a></li>';
+						html += '<li><a href="javascript:void(0);">评论</a></li><li><a href="javascript:void(0);">赞</a></li></ul></div></div>';
+					}
+					html += '<div id="page"></div>';
+					$("#left_blog").append(html);
+				},
+				error : function() {  
+					Util.Tip.warning('获取数据失败！');
+			    }
+			});
+			
+			var $loginName = $('input[name="loginName"]');
+			var $password = $('input[name="password"]');
+			
+			//表单是否填写验证
+			$loginName.blur(function() {
+				if($loginName.val() == "") {
+					Util.Tip.warning("账号不能为空！");
+					return false;
+				}
+			});
+			$password.blur(function() {
+				if($password.val() == "") {
+					Util.Tip.warning("密码不能为空！");
+					return false;
+				}
+			});
+			
+			$('.signin input').click(function() {
+				//表单是否填写验证
+				if($loginName.val() == "") {
+					Util.Tip.warning("账号不能为空！");
+					return false;
+				}
+				if($password.val() == "") {
+					Util.Tip.warning("密码不能为空！");
+					return false;
+				}
+				//验证密码规则
+				if($.trim($password.val()).length<6 || $.trim($password.val()).length > 20){
+					Util.Tip.warning("密码长度必须是6到20位 ！");
+				    $password.focus();
+					return false;
+				}
+				//验证登陆的是手机号、邮箱还是登陆名
+				var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+				var phoneReg = /^\d{11}$/;
+				if ($loginName && emailReg.test($loginName.val())) {
+					$('.account').attr('name','email');
+				}else if ($loginName && phoneReg.test($loginName.val())) {
+					$('.account').attr('name','mobilePhone');
+				}
+				
+				Util.mask.set();
+				//提交个人用户表单数据
+				$.ajax({
+					type : "POST",
+					dataType:"json",
+					url : CONTEXTPATH + "/user/userLogin.do",
+					data : $('#loginForm').serialize(),
+					success : function(data) {
+						if(data.data == "LOGINNAME_ERROR") {
+							Util.Tip.warning('账号不存在！');
+							$loginName.focus();
+							Util.mask.clear();
+							return false;
+						}else if(data.data == "PASSWORD_ERROR") {
+							Util.Tip.warning('密码不正确！');
+							$password.focus();
+							Util.mask.clear();
+							return false;
+						}else {
+							Util.Tip.success("登陆成功！");
+							Util.mask.clear();
+				    		window.open(CONTEXTPATH+"/home/home.do", "_self");
+						}
+					},
+					error : function() {  
+						Util.Tip.warning('登陆失败，请检查表单填写是否有误！');
+				    }
+				});
+			});
+			//登陆的enter键支持
+			enterEvent();
+		}
+		
+		return {
+			IndexDataLoad : IndexDataLoad
+		};
+	})();
+	
+	Index._init();
+})();

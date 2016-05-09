@@ -1,0 +1,51 @@
+/**	
+ * <br>
+ * Copyright 2011 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.iflytek.op.base <br>
+ * FileName: BasicSysCodeManager.java <br>
+ * <br>
+ * @version
+ * @author xsding@iflytek.com
+ * @created 2014-5-26
+ * @last Modified 
+ * @history
+ */
+package com.xiongwu.lingzhong.base;
+
+/**
+ * 	系统配置注入类
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2015年12月10日 下午2:18:39
+ *  @lastModified       
+ *  @history
+ */
+public class BasicSysCodeManager {
+
+	/**
+	 * 邮箱登陆账号
+	 */
+	private String SendName;
+	
+	/**
+	 * 发件人邮箱的登录密码
+	 */
+	private String SendPassword;
+
+	public String getSendName() {
+		return SendName;
+	}
+
+	public void setSendName(String sendName) {
+		SendName = sendName;
+	}
+
+	public String getSendPassword() {
+		return SendPassword;
+	}
+
+	public void setSendPassword(String sendPassword) {
+		SendPassword = sendPassword;
+	}
+}

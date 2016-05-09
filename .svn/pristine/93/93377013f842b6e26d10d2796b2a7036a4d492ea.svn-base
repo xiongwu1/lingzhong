@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	default-autowire="byName">
+
+	<!-- suggestService -->
+	<bean id="suggestService" class="com.iflytek.iframework.business.common.service.SuggestService" parent="entityDao"/>
+	
+	<!-- 缓存配置start -->
+	<bean id="publicZdCacheLoadImpl"
+		class="com.iflytek.iframework.business.cache.impl.PublicZdCacheLoadImpl" parent="entityDao"/>
+	
+	<bean id="entityDao" class="com.iflytek.iframework.orm.hibernate.HibernateEntityDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="systemCacheFactoryBean"
+		class="com.iflytek.iframework.business.cache.SystemCacheFactoryBean"
+		init-method="init" lazy-init="false" depends-on="wasCacheProvider">
+		<constructor-arg>
+			<list>
+				<ref bean="publicZdCacheLoadImpl" />
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="wasCacheProvider" class="com.iflytek.iframework.business.cache.WasCacheProvider">
+		<property name="cacheJndi" value="services/cache/iflytek_cache" />
+	</bean>
+	
+	<!-- Jedis -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxActive" value="${jedis.pool.maxActive}" />
+		<property name="maxIdle" value="${jedis.pool.maxIdle}" />
+		<property name="maxWait" value="${jedis.pool.maxWait}" />
+		<property name="testOnBorrow" value="${jedis.pool.testOnBorrow}" />
+	</bean>
+	<bean id="jedisPool" class="com.xiongwu.lingzhong.support.redis.JedisPool" destroy-method="destory" >
+		<constructor-arg index="0" ref="jedisPoolConfig" />
+		<constructor-arg index="1" value="${jedis.pool.host}" />
+		<constructor-arg index="2" value="${jedis.pool.port}" type="int" />
+		<constructor-arg index="3" value="${jedis.pool.timeout}" type="int" />
+		<constructor-arg index="4" value="${jedis.pool.password}"></constructor-arg>
+	</bean>
+
+	<!-- 用户 -->
+	<bean id="userDao" class="com.xiongwu.lingzhong.persistence.UserDao" />
+	<bean id="userService" class="com.xiongwu.lingzhong.service.impl.UserServiceImpl" />
+	<!-- 发送邮件 -->
+	<bean id="sendMailService" class="com.xiongwu.lingzhong.service.impl.SendMailServiceImpl" />
+	<!-- 上传图片附件接口实现类 -->
+	<bean id="attachmentService" class="com.xiongwu.lingzhong.service.impl.AttachmentServiceImpl"></bean>
+	<bean id="attachmentDao" class="com.xiongwu.lingzhong.persistence.AttachmentDao"></bean>
+	<!-- 邻文 -->
+	<bean id="lwBlogService" class="com.xiongwu.lingzhong.service.impl.LwBlogServiceImpl"></bean>
+	<bean id="lwBlogDao" class="com.xiongwu.lingzhong.persistence.LwBlogDao"></bean>
+	
+	<!-- 邻文图片Dao -->
+	<bean id="zlImageDao" class="com.xiongwu.lingzhong.persistence.ZlImageDao"></bean>
+	
+	<!-- 邻文评论Dao -->
+	<bean id="zlCommentDao" class="com.xiongwu.lingzhong.persistence.ZlCommentDao"></bean>
+	
+	<!-- 邻文操作Dao -->
+	<bean id="zlBlogOperateDao" class="com.xiongwu.lingzhong.persistence.ZlBlogOperateDao"></bean>
+	<bean id="zlBlogOperateService" class="com.xiongwu.lingzhong.service.impl.ZlBlogOperateServiceImpl"></bean>
+	
+	<!-- 用户关系 -->
+	<bean id="relationDao" class="com.xiongwu.lingzhong.persistence.ZlUserRelationDao"></bean>
+	<bean id="zlUserRelationService" class="com.xiongwu.lingzhong.service.impl.ZlUserRelationServiceImpl"></bean>
+	
+	<!-- hibernateUtil -->
+	<bean id="hibernateUtil" class="com.xiongwu.utils.HibernateUtil"/>
+	
+</beans>

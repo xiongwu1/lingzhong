@@ -1,0 +1,10 @@
+(function(_) {
+	var _Dao = _.Dao || {};
+	
+	_Dao.User = { 
+		getUserById: function (id) {
+			return Util.Ajax.post('/desktop/user/getById.do', {userId:id}, 'text');
+		}
+	};
+	_.Dao = _Dao;
+})(window || {});

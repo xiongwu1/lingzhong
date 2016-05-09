@@ -1,0 +1,297 @@
+//隐藏第二步、第三步
+$(function() {
+	$(".basic_info").hide();
+	$(".information").hide();
+});
+
+//表单是否填写验证
+$('input[name="loginName"]').blur(function() {
+	if($('input[name="loginName"]').val() == "") {
+		Util.Tip.warning("登陆名不能为空！");
+		return false;
+	}
+});
+
+$('input[name="password"]').blur(function() {
+	if($('input[name="password"]').val() == "") {
+		Util.Tip.warning("密码不能为空！");
+		return false;
+	}
+});
+
+$('input[name="cpassword"]').blur(function() {
+	if($('input[name="cpassword"]').val() == "") {
+		Util.Tip.warning("重复密码不能为空！");
+		return false;
+	}
+});
+
+//判断2次密码是否一致
+$("input[name='cpassword']").blur(function(){
+	if ($.trim($("input[name='password']").val()) != $.trim($("input[name='cpassword']").val())) {
+		Util.Tip.warning("两次输入密码不匹配！");
+		return false;
+	}
+});
+
+$('input[name="nickName"]').blur(function() {
+	if($('input[name="nickName"]').val() == "") {
+		Util.Tip.warning("昵称不能为空！");
+		return false;
+	}
+});
+
+$('input[name="realName"]').blur(function() {
+	if($('input[name="realName"]').val() == "") {
+		Util.Tip.warning("真实姓名不能为空！");
+		return false;
+	}
+});
+
+$('input[name="szdProvince"]').blur(function() {
+	if($('input[name="szdProvince"]').val() == "") {
+		Util.Tip.warning("所在地-省不能为空！");
+		return false;
+	}
+});
+
+$('input[name="szdCity"]').blur(function() {
+	if($('input[name="szdCity"]').val() == "") {
+		Util.Tip.warning("所在地-市不能为空！");
+		return false;
+	}
+});
+
+$('input[name="gender"]').blur(function() {
+	if($('input[name="gender"]').val() == "") {
+		Util.Tip.warning("性别不能为空！");
+		return false;
+	}
+});
+
+$('input[name="email"]').blur(function() {
+	if($('input[name="email"]').val() == "") {
+		Util.Tip.warning("邮箱不能为空！");
+		return false;
+	}
+});
+
+$('input[name="mobilePhone"]').blur(function() {
+	if($('input[name="mobilePhone"]').val() == "") {
+		Util.Tip.warning("手机号不能为空！");
+		return false;
+	}
+});
+
+$('input[name="qq"]').blur(function() {
+	if($('input[name="qq"]').val() == "") {
+		Util.Tip.warning("QQ不能为空！");
+		return false;
+	}
+});
+
+//jQuery time
+var current_fs, next_fs, previous_fs; //fieldsets
+var left, opacity, scale; //fieldset properties which we will animate
+var animating; //flag to prevent quick multi-click glitches
+
+$(".next").click(function(){
+	//	验证登录名规则
+	var $loginName = $('input[name="loginName"]');
+	var $password = $('input[name="password"]');
+	var $cpassword = $('input[name="cpassword"]');
+	
+	//表单验证
+	if ($loginName.val() == "" || $password.val() == "" || $cpassword.val() == "") {
+		Util.Tip.warning("请检查表单是否填写完整！");
+		return false;
+	}
+	//数字和字母正则
+	var loginNameReg = /^([a-zA-Z])[0-9a-zA-Z\-_\u4e00-\u9fa5]{3,19}$/;
+	if($loginName && !loginNameReg.test($loginName.val())){
+		Util.Tip.warning('登录帐号格式不正确！');
+		$loginName.focus();
+		return false;
+	}
+	//验证密码规则
+	if($.trim($password.val()).length<6 || $.trim($password.val()).length > 20){
+		Util.Tip.warning("密码长度必须是6到20位 ！");
+	    $password.focus();
+		return false;
+	}
+	//验证重复密码是否一致
+	if($cpassword.val() != $password.val()) {
+		Util.Tip.warning("重复密码不一致，请重新输入！");
+		$cpassword.focus();
+		return false;
+	}
+	
+	if(animating) return false;
+	animating = true;
+	
+	current_fs = $(this).parent();
+	next_fs = $(this).parent().next();
+	
+	//activate next step on progressbar using the index of next_fs
+	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+	
+	//show the next fieldset
+	next_fs.show(); 
+	//hide the current fieldset with style
+	current_fs.animate({opacity: 0}, {
+		step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'transform': 'scale('+scale+')'});
+			next_fs.css({'left': left, 'opacity': opacity});
+		}, 
+		duration: 800, 
+		complete: function(){
+			current_fs.hide();
+			animating = false;
+		}, 
+		//this comes from the custom easing plugin
+		easing: 'easeInOutBack'
+	});
+});
+
+$(".second_next").click(function(){
+	
+	var $nickName = $('input[name="nickName"]');
+	var $realName = $('input[name="realName"]');
+	var $szdProvince = $('input[name="szdProvince"]');
+	var $szdCity = $('input[name="szdCity"]');
+	var $gender = $('input[name="gender"]');
+	
+	//表单验证
+	if ($nickName.val() == "" || $realName.val() == "" || $szdProvince.val() == "" || $szdCity.val() == "" || $gender.val() == "") {
+		Util.Tip.warning("请检查表单是否填写完整！");
+		return false;
+	}
+	
+	if(animating) return false;
+	animating = true;
+	
+	current_fs = $(this).parent();
+	next_fs = $(this).parent().next();
+	
+	//activate next step on progressbar using the index of next_fs
+	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+	
+	//show the next fieldset
+	next_fs.show(); 
+	//hide the current fieldset with style
+	current_fs.animate({opacity: 0}, {
+		step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'transform': 'scale('+scale+')'});
+			next_fs.css({'left': left, 'opacity': opacity});
+		}, 
+		duration: 800, 
+		complete: function(){
+			current_fs.hide();
+			animating = false;
+		}, 
+		//this comes from the custom easing plugin
+		easing: 'easeInOutBack'
+	});
+});
+
+$(".previous").click(function(){
+	if(animating) return false;
+	animating = true;
+	
+	current_fs = $(this).parent();
+	previous_fs = $(this).parent().prev();
+	
+	//de-activate current step on progressbar
+	$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+	
+	//show the previous fieldset
+	previous_fs.show(); 
+	//hide the current fieldset with style
+	current_fs.animate({opacity: 0}, {
+		step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+		}, 
+		duration: 800, 
+		complete: function(){
+			current_fs.hide();
+			animating = false;
+		}, 
+		//this comes from the custom easing plugin
+		easing: 'easeInOutBack'
+	});
+});
+
+$(".submit").click(function(){
+	
+	var $email = $('input[name="email"]');
+	var $mobilePhone = $('input[name="mobilePhone"]');
+	var $qq = $('input[name="qq"]');
+	
+	if ($email.val() == "" || $mobilePhone.val() == "" || $qq.val() == "") {
+		Util.Tip.warning("请检查表单是否填写完整！");
+		return false;
+	}
+
+	//邮箱验证
+	emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+	if($email && !emailReg.test($email.val())){
+		Util.Tip.warning('邮箱格式不正确！');
+		$email.focus();
+		return false;
+	}
+	
+	//手机号码格式验证
+	phoneReg = /^\d{11}$/;
+	if($mobilePhone && !phoneReg.test($mobilePhone.val())){
+		Util.Tip.warning('手机号码格式不正确！');
+		$mobilePhone.focus();
+		return false;
+	}
+	Util.mask.set();
+	//提交个人用户表单数据
+	$.ajax({
+		type : "POST",
+		url : CONTEXTPATH + "/user/registerSave.do",
+		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+		data : $('#userForm').serialize(),
+		success : function(data) {
+			/*Util.Tip.success("注册成功，请尽快到个人中心完善个人信息");
+			//屏蔽浏览器提示，直接关闭窗口
+			window.open(CONTEXTPATH+"/index.do", "_self"); */  
+			$.dialog({
+    			title:'提示',
+    			icon:'succeed',
+    			content:'注册成功，请到个人中心完善个人信息。',
+    			drag:false,
+    			lock:true,
+    			close:function(){
+    				Util.mask.clear();
+    				//屏蔽浏览器提示，直接关闭窗口
+    				window.open(CONTEXTPATH+"/index.do", "_self");     
+    			}
+    		});
+		}
+	});
+})

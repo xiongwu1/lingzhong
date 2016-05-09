@@ -1,0 +1,41 @@
+/**	
+ * <br>
+ * Copyright 2015 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.iflytek.lingzhong.web <br>
+ * FileName: IndexController.java <br>
+ * <br>
+ * @version
+ * @author xiongwu@iflytek.com
+ * @created 2015年11月30日
+ * @last Modified 
+ * @history
+ */
+
+package com.xiongwu.lingzhong.web;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+/**
+ * 	首页控制器
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2015年11月30日 下午12:11:05
+ *  @lastModified       
+ *  @history           
+ */
+@Controller
+public class IndexController {
+
+	@RequestMapping("/**.do")
+	public Model goPortalPage(Model model) {
+		return model;
+	}
+
+}
+
+
+
+

@@ -1,0 +1,40 @@
+/**	
+ * <br>
+ * Copyright 2015 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.iflytek.lingzhong.web <br>
+ * FileName: UserController.java <br>
+ * <br>
+ * @version
+ * @author xiongwu@iflytek.com
+ * @created 2015年12月4日
+ * @last Modified 
+ * @history
+ */
+
+package com.xiongwu.lingzhong.web;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+/**
+ * 	用户Controller
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2015年12月4日 下午12:58:37
+ *  @lastModified       
+ *  @history           
+ */
+@Controller
+public class UserController {
+
+	@RequestMapping("/user/**.do")
+	public Model goPortalPage(Model model) {
+		return model;
+	}
+}
+
+
+
+

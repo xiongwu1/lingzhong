@@ -1,0 +1,39 @@
+package com.xiongwu.lingzhong.base;
+
+/**
+ * 	前台提示信息键值对映射
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2015年12月9日 下午1:28:58
+ *  @lastModified       
+ *  @history
+ */
+public class Message {
+	/**
+	 * 登录名不唯一
+	 */
+	public static final String LOGINNAME_NONUNIQUE = "LOGINNAME_NONUNIQUE";
+	/**
+	 * 手机号不唯一
+	 */
+	public static final String PHONE_NONUNIQUE = "PHONE_NONUNIQUE";
+	
+	/**
+	 * 邮箱不唯一
+	 */
+	public static final String EMAIL_NONUNIQUE = "EMAIL_NONUNIQUE";
+	
+	/**
+	 * 手机验证码错误
+	 */
+	public static final String PHONE_RANDOM_ERROR = "PHONE_RANDOM_ERROR";
+	
+	/**
+	 * 注册成功！
+	 */
+	public static final String REGISTER_SUCCESS = "REGISTER_SUCCESS";
+	/**
+	 * 注册失败！
+	 */
+	public static final String REGISTER_FAIL = "REGISTER_FAIL";
+}

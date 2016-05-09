@@ -1,0 +1,48 @@
+/**	
+ * <br>
+ * Copyright 2015 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.xiongwu.lingzhong.service.impl <br>
+ * FileName: UserServiceImpl.java <br>
+ * <br>
+ * @version
+ * @author xiongwu@iflytek.com
+ * @created 2015年12月5日
+ * @last Modified 
+ * @history
+ */
+
+package com.xiongwu.lingzhong.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.xiongwu.lingzhong.domain.TZlUserPerson;
+import com.xiongwu.lingzhong.persistence.UserDao;
+import com.xiongwu.lingzhong.service.IUserService;
+import com.xiongwu.utils.dto.ResultDto;
+
+/**
+ * 	注册用户接口实现类
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2015年12月5日 下午4:49:27
+ *  @lastModified       
+ *  @history           
+ */
+
+public class UserServiceImpl implements IUserService {
+
+	
+	@Autowired
+	private UserDao userDao;
+	
+	public ResultDto registerUser(TZlUserPerson user) {
+		
+		return null;
+	}
+
+}
+
+
+
+

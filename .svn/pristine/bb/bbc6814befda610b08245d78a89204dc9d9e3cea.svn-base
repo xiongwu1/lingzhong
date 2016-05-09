@@ -1,0 +1,123 @@
+(function() {
+	
+	var Home = {
+			_init : function() {
+				window.Home= Home;
+			},
+			HomeIndex : {}
+		};
+	
+	//初始化
+	Home.Base = {
+		Dict : {
+			XB : (function() {
+				return new Util.Dict();
+			})()
+		}
+	};
+	
+	Home.HomeIndex = (function() {
+		
+		//页面加载
+		function HomeIndexLoad() {
+
+			//渲染页面
+			$('body').mask().setMask();
+			$.when(Dao.Dictionary.getDict('XB')).done(function(xb){
+				Home.Base.Dict.XB.Set(xb);
+			}).then(function(){
+				$('body').mask().clearMask();
+				HomeRender();
+			}).fail(function(){
+				$('body').mask().clearMask();
+				window.parent.Util.warn('数据获取失败！');
+			});
+		};
+		
+		//渲染列表页面
+		function HomeRender(){
+			//设置一个定时器，为BUTTON点击事件用
+			var timer=null;
+			var number1=0;
+			
+			//文本框获得焦点和失去焦点时的事件
+			$('.emotion').focus(function(){
+				$(this).css({'border':'1px solid #FA7D3C'});
+				if($(this).val()==''){
+					$(this).siblings('p').html('发言遵守“7条底线”，还可以输入<span>140</span>字').css({'color':'#999','cursor':'','float':'right','font-size':'12px','margin':'5px 5px 0 0'});
+				}
+			}).blur(function(){
+				$(this).css({'border':''});
+				if($(this).val()==''){
+					$(this).css('background-color','white').siblings('p').html('<a href="#"></a>').css({'color':'blue','cursor':'pointer'});
+				}
+			});
+			
+			//文本输入时改变
+			$('.emotion').keyup(function(){
+				if(!$(this).val()==''){
+					$('.release_btn').css({'background-color':'#FF8140'});
+				}else{
+					$('.release_btn').css({'background-color':'#FFC09F'});
+					//$('.release_btn').attr("disabled", "true");
+				}
+				//Math函数向上取值
+				var iNum=Math.ceil(getLength($(this).val())/2);
+				if(iNum<=140){
+					$('.send_weibo p span').html(140-iNum).css('color','#2EFC9D');
+				}else{
+					$('.send_weibo p span').html(iNum-140).css('color','red');
+					$('button').addClass('dis');
+				}
+			});
+			
+			//处理输入的内容是文字还是字母的函数
+			function getLength(str){
+				return String(str).replace(/[^\x00-\xff]/g,'aa').length;
+			};
+			
+			//上传图片下拉框
+			$('.upload_img').click(function() {
+				$('.upload_div').slideDown();
+			});
+			//收缩上传图片下拉框
+			$('.uploadDiv_close').click(function() {
+				$('.upload_div').slideUp();
+			});
+			
+			//绑定按钮事件，当文本框为空时点击背景色会闪动
+			$('.release_btn').click(function(){
+				
+				if ($('.emotion').val() == '') {
+					clearInterval(timer);
+					timer=setInterval(function(){
+						if(number1==4){
+							clearInterval(timer);
+							number1=0;
+						}else{
+							number1++;
+						}
+						if(number1%2){
+							$('.emotion').css('background-color','#FFD9D9');
+						}else{
+							$('.emotion').css('background-color','');
+						}
+					},200);
+				}else{
+					
+					//TODO
+					alert('已成功发布！');
+					$('.emotion').val('');
+					$(this).addClass('dis');
+					$('.emotion').blur();
+				}
+			});
+		};
+		
+		return {
+			HomeIndexLoad : HomeIndexLoad
+		};
+	})();
+	
+	Home._init();
+})();

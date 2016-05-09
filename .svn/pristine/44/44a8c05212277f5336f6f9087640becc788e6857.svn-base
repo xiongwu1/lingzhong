@@ -1,0 +1,57 @@
+/**	
+ * <br>
+ * Copyright 2015 IFlyTek. All rights reserved.<br>
+ * <br>			 
+ * Package: com.xiongwu.lingzhong.persistence <br>
+ * FileName: UserDao.java <br>
+ * <br>
+ * @version
+ * @author xiongwu@iflytek.com
+ * @created 2015年12月5日
+ * @last Modified 
+ * @history
+ */
+
+package com.xiongwu.lingzhong.persistence;
+
+import com.iflytek.iframework.orm.hibernate.HibernateEntityDao;
+import com.iflytek.iframework.utils.HqlMaker;
+import com.xiongwu.lingzhong.domain.TZlUserPerson;
+
+/**
+ *  注册用户Dao
+ *  
+ *  @author xiongwu@iflytek.com
+ *  @created 2015年12月5日 下午4:50:46
+ *  @lastModified       
+ *  @history           
+ */
+
+public class UserDao extends HibernateEntityDao<TZlUserPerson>{
+	
+	/**
+	 * 	验证唯一性
+	 *  
+	 *  @param classname 表名
+	 *  @param fieldName
+	 *  @param fieldValue
+	 *  @return
+	 *  @author xiongwu@iflytek.com
+	 *  @created 2015年12月9日 下午1:37:26
+	 *  @lastModified       
+	 *  @history
+	 */
+	public boolean verifyUserInfo(String classname, String fieldName, String fieldValue) {
+		StringBuilder hql = new StringBuilder("select count(*) from ").append(classname).append(" where 1=1 ");
+        hql.append(HqlMaker.popuHqlEq(fieldName, fieldValue));
+        if(Integer.parseInt(this.createQuery(hql.toString()).uniqueResult().toString()) > 0){
+        	return false;
+        }
+		return true;
+	}
+
+}
+
+
+
+
